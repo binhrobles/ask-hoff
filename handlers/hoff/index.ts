@@ -1,18 +1,36 @@
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
-  Context,
   // @ts-ignore imports
 } from "https://deno.land/x/lambda/mod.ts";
+import { hmac } from "https://deno.land/x/god_crypto/hmac.ts";
 
 const { MS_SECRET, GIPHY_TOKEN } = Deno.env.toObject();
 const MS_SECRET_UTF = atob(MS_SECRET);
 
 export async function handler(
   event: APIGatewayProxyEvent,
-  context: Context,
 ): Promise<APIGatewayProxyResult> {
   try {
+    // Retrieve authorization HMAC information
+    const auth = event.headers.Authorization;
+
+    // Calculate HMAC on the message we've received using the shared secret
+    const encoder = new TextEncoder();
+    const msgBuff = encoder.encode(event.body || "");
+    const msgHash = `HMAC ${hmac("sha256", MS_SECRET_UTF, msgBuff).base64()}`;
+
+    if (auth !== msgHash) {
+      console.error("Failed message authentication");
+      return {
+        statusCode: 403,
+        body: JSON.stringify({
+          type: "message",
+          text: "Error: message sender cannot be authenticated",
+        }),
+      };
+    }
+
     let tone;
     let answer;
     const randomNum = Math.random();
