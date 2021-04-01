@@ -37,11 +37,24 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
-      - name: cdk diff
+      - name: Show CDK diff if not a push to main
+        if: github.ref != 'refs/heads/main' || github.event_name != 'push'
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'diff'
           actions_comment: true
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-east-1'
+
+      - name: Deploy if push to main
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: 'deploy'
+          cdk_args: '--require-approval never'
+          actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
