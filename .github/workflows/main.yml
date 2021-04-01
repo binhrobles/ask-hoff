@@ -39,10 +39,7 @@ jobs:
 
       - name: Show CDK diff if not a push to main
         if: github.ref != 'refs/heads/main' || github.event_name != 'push'
-        uses: youyo/aws-cdk-github-actions@v2
-        with:
-          cdk_subcommand: 'diff'
-          actions_comment: true
+        run: yarn diff
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -50,11 +47,7 @@ jobs:
 
       - name: Deploy if push to main
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: youyo/aws-cdk-github-actions@v2
-        with:
-          cdk_subcommand: 'deploy'
-          cdk_args: '--require-approval never'
-          actions_comment: false
+        run: yarn deploy --require-approval never
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
