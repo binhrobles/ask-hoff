@@ -2,7 +2,7 @@
 
 Hasselhoff take the wheel.
 
-![HOFF](https://giphy.com/gifs/N8kmvUsp0gObK/html5)
+![HOFF](https://media.giphy.com/media/N8kmvUsp0gObK/giphy.gif)
 
 ## Useful commands
 
