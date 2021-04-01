@@ -1,8 +1,8 @@
-# Welcome to your CDK TypeScript project!
+# Ask Hoff
 
-This is a blank project for TypeScript development with CDK.
+Hasselhoff take the wheel.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+![HOFF](https://giphy.com/gifs/N8kmvUsp0gObK/html5)
 
 ## Useful commands
 
