@@ -2,7 +2,7 @@
 
 Hasselhoff take the wheel.
 
-![HOFF](https://giphy.com/gifs/N8kmvUsp0gObK/html5)
+![HOFF](https://media.giphy.com/media/N8kmvUsp0gObK/giphy.gif)
 
 A stab at using Deno and MS Teams Bots. Built using CDK + [a Deno Docker Lambda runtime](https://github.com/hayd/deno-lambda) to simplify building/deploying.
 
