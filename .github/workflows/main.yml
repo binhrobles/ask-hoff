@@ -44,6 +44,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-east-1'
+          MS_SECRET: ${{ secrets.MS_SECRET }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
 
       - name: Deploy if push to main
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -52,3 +54,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-east-1'
+          MS_SECRET: ${{ secrets.MS_SECRET }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
